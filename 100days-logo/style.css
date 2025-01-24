@@ -1,10 +1,13 @@
 /*
 Styles for a new exercise
 */
-
-.container {
+:root {
   --bl: rgba(54, 45, 127, 1);
   --tr: rgba(44, 142, 145, 1);
+  --logo-color: #fff;
+}
+
+.container {
   font-family: 'Courier New', Courier, sans-serif;
   width: 100%;
   height: 100%;
@@ -15,58 +18,58 @@ Styles for a new exercise
 }
 
 .logo {
+  color: var(--logo-color);
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: rgb(232, 230, 227);
-  width: 200px;
 }
 
 .hundred-container {
+  --stroke-width: 24px;
+
   position: relative;
   height: 100px;
   margin-top: 9px;
-  --stroke-width: 24px;
-  --one-color: rgb(24, 26, 27);
 
-  .one {
-    position: absolute;
-    height: 100%;
-    width: var(--stroke-width);
-    background: var(--one-color);
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
-    z-index: 10;
-  }
+}
 
-  .one-arm {
-    position: absolute;
-    top: 0;
-    left: -15px;
-    width: 20px;
-    height: 40px;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
+.one {
+  position: absolute;
+  height: 100%;
+  width: var(--stroke-width);
+  background: var(--logo-color);
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
+  z-index: 10;
+}
 
-    background: var(--one-color);
-    transform: rotate(50deg);
-  }
+.one-arm {
+  background: var(--logo-color);
+  position: absolute;
+  top: 0;
+  left: -15px;
+  width: 20px;
+  height: 40px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
+  transform: rotate(50deg);
+}
 
-  .zero {
-    position: absolute;
-    border: var(--stroke-width) solid rgb(48, 52, 54);
-    border-radius: 50%;
-    width: 52px;
-    height: 52px;
-    background: transparent;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
-    left: 18px;
-    z-index: 5;
+.zero {
+  position: absolute;
+  border: var(--stroke-width) solid var(--logo-color);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  background: transparent;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 13px 0px;
+  left: 18px;
+  z-index: 5;
 
-    &:last-of-type {
-      left: 100px;
-      z-index: 1;
-    }
+  &:last-of-type {
+    left: 100px;
+    z-index: 1;
   }
 }
 
@@ -90,4 +93,12 @@ Styles for a new exercise
   line-height: 23px;
   font-weight: 800;
   letter-spacing: 1px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bl: var(--aqua1);
+    --tr: var(--green1);
+    --logo-color: var(--fg1);
+  }
 }
