@@ -18,6 +18,7 @@
   font-family: "Atkinson", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 18px;
 
   color-scheme: dark light;
   color: var(--fg0);
@@ -33,17 +34,26 @@ a {
   color: var(--orange2);
 }
 
+body {
+  margin: 0;
+}
+
+#app {
+  width: 800px;
+  max-width: calc(100% - 2em);
+  margin: auto;
+  padding: 3em 1em;
+}
+
 /**
 * Styles for individual exercises
 */
 .frame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
+  display: block;
+  margin: auto;
   width: 400px;
   height: 400px;
-  margin-top: -200px;
-  margin-left: -200px;
   border-radius: 2px;
   box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
   overflow: hidden;
