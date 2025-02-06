@@ -9,6 +9,21 @@
   width: var(--icon-width);
 }
 
+label {
+  position: absolute;
+  left: -9999px;
+}
+
+#hamburger-input {
+  position: absolute;
+  cursor: pointer;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 5;
+}
+
 .icon {
   --line-height: 8px;
   position: absolute;
@@ -30,39 +45,34 @@
 
 .line.one {
   top: 0px;
+  transition: rotate 0.5s, top 0.5s 0.5s;
 }
 
 .line.two {
   top: calc(var(--icon-height)/2 - var(--line-height)/2);
+  transition: all 0.5s 0.5s;
 }
 
 .line.three {
   top: calc(var(--icon-height) - var(--line-height));
+  transition: rotate 0.5s, top 0.5s 0.5s;
 }
 
 #hamburger-input:checked~.icon .line.one {
-  background: red;
+  top: calc(var(--icon-height)/2 - var(--line-height)/2);
+  rotate: 45deg;
+  transition: top 0.5s, rotate 0.5s 0.5s;
+
 }
 
 #hamburger-input:checked~.icon .line.two {
-  background: red;
+  scale: 0;
+  opacity: 0;
+  transition: all 0.5s;
 }
 
 #hamburger-input:checked~.icon .line.three {
-  background: red;
-}
-
-label {
-  position: absolute;
-  left: -9999px;
-}
-
-#hamburger-input {
-  position: absolute;
-  cursor: pointer;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0.2;
-  z-index: 5;
+  top: calc(var(--icon-height)/2 - var(--line-height)/2);
+  rotate: -45deg;
+  transition: top 0.5s, rotate 0.5s 0.5s;
 }
