@@ -1,0 +1,90 @@
+/*
+Styles for a new exercise
+*/
+
+:root {
+  --bg-color: #272C34;
+  --sky-color: #7DDFFC;
+  --sand-color: #F0DE75;
+  --sand-shade-color: #C1B25E;
+  --pyramid-color: #f3f3f3;
+  --pyramid-shade-color: #ded8d8;
+  --sun-color: #FFEF00;
+}
+
+.frame {
+  background-color: var(--bg-color);
+}
+
+.scene {
+  --scene-size: 160px;
+  --horizon: 69%;
+  --sun-center-x: 33%;
+  --sun-center-y: 0;
+  --pyramid-width: 115px;
+  --pyramid-height: 60px;
+  --pyramid-left: calc(100%/2 - var(--pyramid-width)/2);
+  --pyramid-right: calc(100%/2 + var(--pyramid-width)/2);
+  --sand-shadow-tip-x: calc(var(--scene-size) - var(--sun-center-x));
+  height: var(--scene-size);
+  width: var(--scene-size);
+  background-color: magenta;
+  position: relative;
+  border-radius: 100%;
+  clip-path: circle(50%);
+}
+
+.sky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: var(--horizon);
+  background-color: var(--sky-color);
+}
+
+.sun {
+  --sun-size: 34px;
+  position: absolute;
+  top: calc(var(--sun-center-y) - var(--sun-size) / 2);
+  left: calc(var(--sun-center-x) - var(--sun-size) / 2);
+  width: var(--sun-size);
+  height: var(--sun-size);
+  background-color: var(--sun-color);
+  border-radius: 100%;
+}
+
+.sand {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - var(--horizon));
+  top: var(--horizon);
+  background-color: var(--sand-color);
+}
+
+.sand.shade {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - var(--horizon));
+  top: var(--horizon);
+  background-color: var(--sand-shade-color);
+  clip-path: polygon(var(--pyramid-left) 0%, var(--pyramid-right) 0, var(--sand-shadow-tip-x) 70%);
+}
+
+.pyramid {
+  position: absolute;
+  bottom: calc(100% - var(--horizon));
+  left: var(--pyramid-left);
+  background-color: var(--pyramid-color);
+  height: var(--pyramid-height);
+  width: var(--pyramid-width);
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.pyramid.shade {
+  bottom: calc(100% - var(--horizon));
+  left: calc(100%/2 - var(--pyramid-width)/2);
+  background-color: var(--pyramid-shade-color);
+  height: var(--pyramid-height);
+  width: var(--pyramid-width);
+  clip-path: polygon(50% 0, 70% 100%, 100% 100%);
+}
