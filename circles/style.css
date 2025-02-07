@@ -1,0 +1,54 @@
+/*
+Styles for a new exercise
+*/
+
+.frame {
+  background-color: red;
+}
+
+.center {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.circle {
+  --delay-offset: 0.2s;
+  --duration: 4.0s;
+  --size: 100%;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 6px 7px 10px 5px rgba(0, 0, 0, 0.1);
+  animation: grow-shrink 2.0s ease-in-out infinite;
+  animation-duration: var(--duration);
+  z-index: 1;
+}
+
+.circle:nth-child(2) {
+  --size: 66%;
+  animation-delay: calc(var(--delay-offset) * 1);
+  z-index: 3;
+}
+
+.circle:nth-child(3) {
+  --size: 33%;
+  animation-delay: calc(var(--delay-offset) * 2);
+  z-index: 5;
+}
+
+@keyframes grow-shrink {
+
+  0%,
+  100% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
