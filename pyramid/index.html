@@ -16,7 +16,7 @@
     <nav>
       <a href="/">Home</a>
     </nav>
-    <h1>A new exercise</h1>
+    <h1>Pyramid</h1>
     <p><a target="_blank" href="https://100dayscss.com/days/3/">Link</a></p>
 
     <div class="frame reset">
@@ -30,7 +30,21 @@
       </div>
     </div>
     <h2>Notes</h2>
-    <p>This exercise isn't ready yet, but here we are.</p>
+    <h3>CSS variables cannot be animated!</h3>
+    <p>I didn't know this until <b>after</b> I calculated all of the elements based on the position of the sun.
+      The goal
+      was to animate the sun, and then have everything else (the pyramid shadown position, the pyramid color, the sky
+      color) be based on the sun's location.</p>
+    <p>When I attempted to animate the X position of the sun, the sun jumped from one position to the next, instead of
+      easing from one location to another. To fix this, I can do one of two things:</p>
+    <ul>
+      <li>Assign custom CSS properties, which can be animated, but has limited browser support.</li>
+      <li>Move calculations into existing properties.</li>
+    </ul>
+
+    <p>For better support, I'll move the calculations into their own properties. <b>Animate properties, <b>NOT</b>
+        variables.</p>
+
   </div>
 </body>
 

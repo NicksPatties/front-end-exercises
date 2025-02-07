@@ -25,9 +25,7 @@ Styles for a new exercise
   --pyramid-height: 60px;
   --pyramid-left: calc(100%/2 - var(--pyramid-width)/2);
   --pyramid-right: calc(100%/2 + var(--pyramid-width)/2);
-  --sun-d-to-horizon: calc(var(--horizon) - var(--sun-center-y));
-  --sand-shadow-tip-x: calc(var(--scene-size) - var(--sun-center-x));
-  --sand-shadow-tip-y: calc(100% - var(--horizon) - 0.75 * var(--sun-d-to-horizon) + 33%);
+  --animation-duration: 8s;
   height: var(--scene-size);
   width: var(--scene-size);
   background-color: magenta;
@@ -35,10 +33,7 @@ Styles for a new exercise
   border-radius: 100%;
   clip-path: circle(50%);
   opacity: 1.0;
-  animation-name: scene-anim;
-  animation-duration: 4.0s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation: fade linear var(--animation-duration) infinite;
 }
 
 .sky {
@@ -47,17 +42,22 @@ Styles for a new exercise
   width: 100%;
   height: var(--horizon);
   background-color: var(--sky-color);
+  animation: sky-color linear var(--animation-duration) infinite;
 }
 
 .sun {
   --sun-size: 34px;
+  --initial-transform: rotate(70deg);
   position: absolute;
-  top: calc(var(--sun-center-y) - var(--sun-size) / 2);
-  left: calc(var(--sun-center-x) - var(--sun-size) / 2);
+  top: calc(-1 * var(--sun-size) / 2);
+  left: 0;
   width: var(--sun-size);
   height: var(--sun-size);
   background-color: var(--sun-color);
   border-radius: 100%;
+  transform-origin: 0 var(--scene-size);
+  transform: var(--initial-transform);
+  animation: sunset linear var(--animation-duration) infinite;
 }
 
 .sand {
@@ -66,17 +66,20 @@ Styles for a new exercise
   height: calc(100% - var(--horizon));
   top: var(--horizon);
   background-color: var(--sand-color);
+  animation: sand-color linear var(--animation-duration) infinite;
 }
 
 .sand.shade {
+  --initial-clip-path: polygon(var(--pyramid-left) 0%,
+      var(--pyramid-right) 0,
+      -10% 120%);
   position: absolute;
   width: 100%;
   height: calc(100% - var(--horizon));
   top: var(--horizon);
   background-color: var(--sand-shade-color);
-  clip-path: polygon(var(--pyramid-left) 0%,
-      var(--pyramid-right) 0,
-      var(--sand-shadow-tip-x) var(--sand-shadow-tip-y));
+  clip-path: var(--initial-clip-path);
+  animation: shadow-tip linear var(--animation-duration) infinite;
 }
 
 .pyramid {
@@ -87,6 +90,7 @@ Styles for a new exercise
   height: var(--pyramid-height);
   width: var(--pyramid-width);
   clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  animation: pyramid-color linear var(--animation-duration) infinite;
 }
 
 .pyramid.shade {
@@ -96,29 +100,123 @@ Styles for a new exercise
   height: var(--pyramid-height);
   width: var(--pyramid-width);
   clip-path: polygon(50% 0, 70% 100%, 100% 100%);
+  animation: pyramid-shade-color linear var(--animation-duration) infinite;
 }
 
-@keyframes scene-anim {
+
+@keyframes fade {
+
+  0%,
+  5% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  95%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sunset {
   0% {
-    --sun-center-x: calc(0 * 100%);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0;
-  }
-
-  50% {
-    --sun-center-x: calc(0.5 * 100%);
-    opacity: 1.0;
-  }
-
-  90% {
-    opacity: 0;
+    transform: rotate(-40deg);
   }
 
   100% {
-    --sun-center-x: calc(100%);
-    opacity: 0;
+    transform: rotate(120deg);
+  }
+}
+
+@keyframes shadow-tip {
+  0% {
+    clip-path: polygon(var(--pyramid-left) 0%,
+        var(--pyramid-right) 0,
+        110% 10%);
+  }
+
+  33% {
+    clip-path: polygon(var(--pyramid-left) 0%,
+        var(--pyramid-right) 0,
+        90% 20%);
+  }
+
+  70% {
+    clip-path: polygon(var(--pyramid-left) 0%,
+        var(--pyramid-right) 0,
+        -10% 120%);
+  }
+
+  100% {
+    clip-path: polygon(var(--pyramid-left) 0%,
+        var(--pyramid-right) 0,
+        -40% 10%);
+  }
+}
+
+@keyframes sky-color {
+
+  0%,
+  50% {
+    background-color: var(--sky-color);
+
+  }
+
+  70% {
+
+    background-color: orange;
+
+  }
+
+  90%,
+  100% {
+    background-color: indigo;
+  }
+}
+
+@keyframes sand-color {
+  60% {
+    background-color: var(--sand-color);
+  }
+
+  70% {
+    background-color: var(--sand-shade-color);
+  }
+
+  100% {
+    background-color: var(--sand-shade-color);
+  }
+}
+
+@keyframes pyramid-color {
+
+  0%,
+  40% {
+    background-color: var(--pyramid-color);
+  }
+
+  55%,
+  100% {
+    background-color: var(--pyramid-shade-color);
+  }
+}
+
+@keyframes pyramid-shade-color {
+
+  0%,
+  40% {
+    background-color: var(--pyramid-shade-color);
+  }
+
+  55%,
+  100% {
+    background-color: var(--pyramid-color);
   }
 }
